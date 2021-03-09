@@ -7,6 +7,7 @@ import {
 } from 'react'
 
 interface IThemeContext {
+  customThemes: ITheme
   colorMode: string
   setColorMode: (newValue: string) => void
 }
@@ -27,7 +28,7 @@ type themeModes = {
   dark: { [theme: string]: string }
 }
 export interface ITheme {
-  themes: [themeModes]
+  themes: themeModes
 }
 interface Props {
   children: ReactNode
@@ -35,7 +36,7 @@ interface Props {
 
 export function ThemeProvider(
   { children }: Props,
-  { themes }: ITheme
+  themes: ITheme
 ): JSX.Element {
   const [colorMode, rawSetColorMode] = useState<string>('')
 
@@ -63,7 +64,9 @@ export function ThemeProvider(
   }
 
   return (
-    <ThemeContext.Provider value={{ colorMode, setColorMode }}>
+    <ThemeContext.Provider
+      value={{ customThemes: themes, colorMode, setColorMode }}
+    >
       {children}
     </ThemeContext.Provider>
   )

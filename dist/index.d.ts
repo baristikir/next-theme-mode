@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 interface IThemeContext {
+    customThemes: ITheme;
     colorMode: string;
     setColorMode: (newValue: string) => void;
 }
@@ -14,11 +15,11 @@ declare type themeModes = {
     };
 };
 export interface ITheme {
-    themes: [themeModes];
+    themes: themeModes;
 }
 interface Props {
     children: ReactNode;
 }
-export declare function ThemeProvider({ children }: Props, { themes }: ITheme): JSX.Element;
+export declare function ThemeProvider({ children }: Props, themes: ITheme): JSX.Element;
 export declare function ScriptHydrationTheme(Theme: ITheme): JSX.Element;
 export {};

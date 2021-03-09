@@ -2,10 +2,11 @@ import React from 'react'
 import type { AppProps } from 'next/app'
 import { NextPageContext } from 'next'
 import { ThemeProvider } from 'next-theme-mode'
+import { Theme } from '../theme/Theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider>
+    <ThemeProvider themes={Theme}>
       <Component {...pageProps} />
     </ThemeProvider>
   )
