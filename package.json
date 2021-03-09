@@ -21,6 +21,7 @@
     "build": "microbundle --jsx React.createElement --compress --no-sourcemap"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.13.8",
     "@types/next": "^9.0.0",
     "@types/react": "^17.0.3",
     "microbundle": "^0.13.0",
