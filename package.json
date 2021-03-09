@@ -10,6 +10,17 @@
   ],
   "author": "Baris Tikir",
   "license": "MIT",
-  "main": "dist/index.js",
-  "main:src": "src/index.ts"
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "source": "src/index.tsx",
+  "devDependencies": {
+    "@types/next": "^9.0.0",
+    "@types/react": "^17.0.3",
+    "typescript": "^4.2.3"
+  },
+  "peerDependencies": {
+    "next": "^10.0.8",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
 }
