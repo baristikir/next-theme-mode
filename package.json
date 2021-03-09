@@ -1,0 +1,15 @@
+{
+  "name": "next-theme-mode",
+  "version": "1.0.0",
+  "description": "Quickly add dark-mode or custom theme modes to your react/nextjs application",
+  "keywords": [
+    "next",
+    "nextjs",
+    "dark-mode",
+    "theme-mode"
+  ],
+  "author": "Baris Tikir",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "main:src": "src/index.ts"
+}
