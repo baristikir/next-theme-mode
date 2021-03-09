@@ -5,29 +5,33 @@ import Layout from '../components/Layout'
 const IndexPage: React.FC = () => {
   const { colorMode, setColorMode } = useTheme()
 
-  if (!colorMode) {
-    return null
-  }
-
   const isDark = colorMode === 'dark' ? true : false
 
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
-      <h1>Hello Next.js 👋</h1>
-      <p>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-        <button
-          onClick={() =>
-            isDark ? setColorMode('light') : setColorMode('dark')
-          }
-        >
-          Change Mode
-        </button>
-        <span>Current Color Mode: {colorMode}</span>
-      </p>
-    </Layout>
+    <div style={{ backgroundColor: 'var(--color-primaryBackground)' }}>
+      <Layout title="Home | Next.js + TypeScript Example">
+        <h1 style={{ color: 'var(--color-primaryText)' }}>Hello Next.js 👋</h1>
+        <p>
+          <Link href="/about">
+            <a style={{ color: 'var(--color-primaryText)' }}>About</a>
+          </Link>
+          <button
+            style={{
+              color: 'var(--color-primaryText)',
+              backgroundColor: 'var(--color-primaryBackground)',
+            }}
+            onClick={() =>
+              isDark ? setColorMode('light') : setColorMode('dark')
+            }
+          >
+            Change Mode
+          </button>
+          <span style={{ color: 'var(--color-primaryText)' }}>
+            Current Color Mode: {colorMode}
+          </span>
+        </p>
+      </Layout>
+    </div>
   )
 }
 
