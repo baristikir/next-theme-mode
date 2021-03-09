@@ -1,6 +1,6 @@
 {
   "name": "next-theme-mode",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Quickly add dark-mode or custom theme modes to your react/nextjs application",
   "keywords": [
     "next",
@@ -10,8 +10,13 @@
   ],
   "author": "Baris Tikir",
   "license": "MIT",
-  "main": "dist/index.jsx",
-  "source": "src/index.tsx",
+  "main": "./dist/index.jsx",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.modern.js",
+  "source": "./src/index.tsx",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "microbundle --jsx React.createElement --compress --no-sourcemap"
   },

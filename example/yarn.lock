@@ -869,10 +869,10 @@ native-url@0.3.4:
   dependencies:
     querystring "^0.2.0"
 
-next-theme-mode@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/next-theme-mode/-/next-theme-mode-1.0.0.tgz#efa20933d1f8b93c4dc3f84f5c65d6e13cfec159"
-  integrity sha512-jqrxjfjAvdDCnkA4rSRxwtyzZpoeJLTuBI6dlCMy7VOnZSL0Sf5ZFEGr6GThTDdZTbDVPSjl08IpLMN/IzHiaQ==
+next-theme-mode@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/next-theme-mode/-/next-theme-mode-1.0.1.tgz#1112b4e5afd9a28bd08809797ef6c6fd83df40f8"
+  integrity sha512-f7op1lJ/Me0K4izHzcE5Ts7oHncg5ye9Zb25u08XFw9p379wUuJ2svaLiJlbmqQgxJQVD/GqfVEakPjKFV+aDw==
 
 next-themes@^0.0.12:
   version "0.0.12"
