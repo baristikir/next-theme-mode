@@ -10,12 +10,15 @@
   ],
   "author": "Baris Tikir",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/index.jsx",
   "source": "src/index.tsx",
+  "scripts": {
+    "build": "microbundle --jsx React.createElement --compress --no-sourcemap"
+  },
   "devDependencies": {
     "@types/next": "^9.0.0",
     "@types/react": "^17.0.3",
+    "microbundle": "^0.13.0",
     "typescript": "^4.2.3"
   },
   "peerDependencies": {

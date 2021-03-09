@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "outDir": "dist",
     "allowJs": true,
     "jsx": "preserve",
     "target": "esnext",
     "module": "esnext",
     "lib": ["dom", "es2019"],
-    "noEmit": true,
+    "noEmit": false,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -24,5 +25,6 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "resolveJsonModule": true
-  }
+  },
+  "include": ["src/*.tsx"]
 }
