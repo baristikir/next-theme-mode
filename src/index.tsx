@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   ReactNode,
   useContext,
@@ -7,7 +7,6 @@ import {
 } from 'react'
 
 interface IThemeContext {
-  customThemes: ITheme
   colorMode: string
   setColorMode: (newValue: string) => void
 }
@@ -30,14 +29,15 @@ type themeModes = {
 export interface ITheme {
   themes: themeModes
 }
-interface Props {
+interface ThemeProviderProps {
   children: ReactNode
+  customThemes: themeModes
 }
 
-export function ThemeProvider(
-  { children }: Props,
-  themes: ITheme
-): JSX.Element {
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+  children,
+  customThemes,
+}): JSX.Element => {
   const [colorMode, rawSetColorMode] = useState<string>('')
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export function ThemeProvider(
     localStorage.setItem('color-mode', newValue)
     //Update stored colors
     //@ts-ignore
-    Object.entries(themes[newValue]).forEach(([name, colorByTheme]) => {
+    Object.entries(customThemes[newValue]).forEach(([name, colorByTheme]) => {
       const cssVarName = `--color-${name}`
 
       root.style.setProperty(cssVarName, String(colorByTheme))
@@ -64,9 +64,7 @@ export function ThemeProvider(
   }
 
   return (
-    <ThemeContext.Provider
-      value={{ customThemes: themes, colorMode, setColorMode }}
-    >
+    <ThemeContext.Provider value={{ colorMode, setColorMode }}>
       {children}
     </ThemeContext.Provider>
   )
