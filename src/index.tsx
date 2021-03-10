@@ -29,12 +29,12 @@ type themeModes = {
 export interface ITheme {
   themes: themeModes
 }
-interface ThemeProviderProps {
+interface ThemeModeProviderProps {
   children: ReactNode
   customThemes: themeModes
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+export const ThemeModeProvider: React.FC<ThemeModeProviderProps> = ({
   children,
   customThemes,
 }): JSX.Element => {

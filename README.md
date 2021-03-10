@@ -12,7 +12,9 @@
 
 </p>
 
-## Live Demo
+## Description
+
+This npm package is for `nextjs` projects. Simply to add **dark-mode** and **light-mode** functionalities with _2 lines of code_.
 
 ## Requirements
 
@@ -26,8 +28,122 @@ npm install next-theme-mode
 yarn add next-theme-mode
 ```
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In order to use this package you need just to modify the `_app.js` and `_document.js`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+First of all you need to create a `Theme.jsx`/`Theme.tsx` file and put your theming into it. You can put your colors for the different theme modes into this file.
+Make sure to name the **variables identically** for light and dark theme to get full usage of the theme switching.
+
+```js
+// theme/Theme.jsx
+export const Theme = {
+  light: {
+    /**
+     * Background Color
+     */
+    primaryBackground: '#FFFFFF',
+    secondaryBackground: '#fafafa',
+    /**
+     * Text Colors
+     */
+    primaryText: '#192635',
+  },
+  dark: {
+    /**
+     * Background Color
+     */
+    primaryBackground: '#181818',
+    secondaryBackground: '#0E141B',
+    /**
+     * Text Colors
+     */
+    primaryText: '#fbfbfc',
+  },
+}
+```
+
+You will need to customize the `_app.js` inside the pages directory.
+
+```js
+// pages/_app.js
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+
+export default MyApp
+```
+
+Add the `ThemeModeProvider` to your `_app.js` / `_app.tsx`
+
+```js
+// pages/_app.js
+import { ThemeModeProvider } from 'next-theme-mode'
+import { Theme } from '../theme/Theme'
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <ThemeModeProvider customThemes={Theme}>
+      <Component {...pageProps} />
+    </ThemeModeProvider>
+  )
+}
+
+export default MyApp
+```
+
+Also to prevent any flashing on reloads while using `dark-mode` add this to your `_document.js` / `_document.tsx`
+
+```js
+import React from 'react'
+import NextDocument, { Head, Html, Main, NextScript } from 'next/document'
+import { ScriptHydrationTheme } from 'next-theme-mode'
+import { Theme } from '../theme/Theme'
+
+export default class Document extends NextDocument {
+  render(): JSX.Element {
+    return (
+      <Html>
+        <Head />
+        <body>
+          // Add this line to achieve non flashing
+          <ScriptHydrationTheme themes={Theme} />
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
+}
+```
+
+That's all it for the setup. Now you can use the `useTheme()` hook to change the theme modes and also use the colors in your `css` stylings.
+
+### useTheme
+
+To know which theme is currently active you can use the `useTheme()` hook. The `colorMode` Object contains the current theme as a `string`.
+With the `setColorMode` function you can change the theme by passing a `string` into it.
+
+```js
+const { colorMode, setColorMode } = useTheme()
+
+const isDark = colorMode === 'dark' ? true : false
+
+const changeTheme = () => {
+  isDark ? setColorMode('light') : setColorMode('dark')
+}
+return <button onClick={() => changeTheme()}>Change Mode</button>
+```
+
+### Css Variables
+
+You can now use the theme variables in your css styles.
+The passed in theme variables have always the prefix `--color- `.
+
+```css
+button {
+  background-color: var(--color-primaryBackground);
+  color: var(--color-primaryText);
+}
+```
