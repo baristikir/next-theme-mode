@@ -16,6 +16,12 @@
 
 This npm package is for `nextjs` projects. Simply to add **dark-mode** and **light-mode** functionalities with _2 lines of code_.
 
+## Example
+
+Example project with `next-theme-mode`
+
+https://github.com/baristikir/next-theme-mode/tree/main/example
+
 ## Requirements
 
 To use `next-theme-mode`, you must use `react@16.8.0` or greater.
