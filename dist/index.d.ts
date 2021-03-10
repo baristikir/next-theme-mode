@@ -16,10 +16,10 @@ declare type themeModes = {
 export interface ITheme {
     themes: themeModes;
 }
-interface ThemeProviderProps {
+interface ThemeModeProviderProps {
     children: ReactNode;
     customThemes: themeModes;
 }
-export declare const ThemeProvider: React.FC<ThemeProviderProps>;
-export declare function ScriptHydrationTheme(Theme: ITheme): JSX.Element;
+export declare const ThemeModeProvider: React.FC<ThemeModeProviderProps>;
+export declare function ScriptHydrationTheme(Theme: themeModes): JSX.Element;
 export {};

@@ -104,7 +104,7 @@ function injection() {
   })
 }
 
-export function ScriptHydrationTheme(Theme: ITheme): JSX.Element {
+export function ScriptHydrationTheme(Theme: themeModes): JSX.Element {
   const functionString = String(injection).replace(
     "'substitutedForTheme'",
     JSON.stringify(Theme)
