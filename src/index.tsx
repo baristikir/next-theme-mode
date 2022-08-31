@@ -3,12 +3,13 @@ import React, {
   ReactNode,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react'
 
 interface IThemeContext {
   colorMode: string
-  setColorMode: (newValue: string) => void
+  setColorMode: (newValue: keyof ThemeModes) => void
 }
 export const ThemeContext = createContext<IThemeContext>({} as IThemeContext)
 
@@ -22,16 +23,16 @@ export const useTheme = () => {
   return context
 }
 
-type themeModes = {
+type ThemeModes = {
   light: { [theme: string]: string }
   dark: { [theme: string]: string }
 }
 export interface ITheme {
-  themes: themeModes
+  themes: ThemeModes
 }
 interface ThemeModeProviderProps {
   children: ReactNode
-  customThemes: themeModes
+  customThemes: ThemeModes
 }
 
 export const ThemeModeProvider: React.FC<ThemeModeProviderProps> = ({
@@ -48,23 +49,29 @@ export const ThemeModeProvider: React.FC<ThemeModeProviderProps> = ({
     rawSetColorMode(initialColorValue)
   }, [])
 
-  function setColorMode(newValue: string): void {
-    // Update React color-mode state
-    const root = window.document.documentElement
-    rawSetColorMode(newValue)
-    // Update localStorage
-    localStorage.setItem('color-mode', newValue)
-    //Update stored colors
-    //@ts-ignore
-    Object.entries(customThemes[newValue]).forEach(([name, colorByTheme]) => {
-      const cssVarName = `--color-${name}`
+  const contextValue = useMemo(() => {
+    const setColorMode = (newValue: keyof ThemeModes) => {
+      const root = window.document.documentElement
 
-      root.style.setProperty(cssVarName, String(colorByTheme))
-    })
-  }
+      localStorage.setItem('color-mode', newValue)
+
+      Object.entries(customThemes[newValue]).forEach(([name, colorByTheme]) => {
+        const cssVarName = `--color-${name}`
+
+        root.style.setProperty(cssVarName, String(colorByTheme))
+      })
+
+      rawSetColorMode(newValue)
+    }
+
+    return {
+      colorMode: colorMode,
+      setColorMode,
+    }
+  }, [colorMode, rawSetColorMode])
 
   return (
-    <ThemeContext.Provider value={{ colorMode, setColorMode }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   )
@@ -72,39 +79,38 @@ export const ThemeModeProvider: React.FC<ThemeModeProviderProps> = ({
 
 function injection() {
   const theme = 'substitutedForTheme'
-  function getInitialColorMode() {
+  function getInitialColorMode(): keyof ThemeModes {
     const persistedColorPreference = window.localStorage.getItem('color-mode')
     const hasPersistedPreference = typeof persistedColorPreference === 'string'
-    // If the user has explicitly chosen light or dark,
-    // let's use it. Otherwise, this value will be null.
+
     if (hasPersistedPreference) {
-      return persistedColorPreference
+      return persistedColorPreference as keyof ThemeModes
     }
-    // If they haven't been explicit, let's check the media
-    // query
+
+    // If they haven't been explicit, let's check the media query
     const mql = window.matchMedia('(prefers-color-scheme: dark)')
     const hasMediaQueryPreference = typeof mql.matches === 'boolean'
     if (hasMediaQueryPreference) {
       return mql.matches ? 'dark' : 'light'
     }
     // If they are using a browser/OS that doesn't support
-    // color themes, let's default to 'light'.
+    // color themes, default light.
     return 'light'
   }
 
-  const colorMode: string | null = getInitialColorMode()
+  const colorMode = getInitialColorMode()
   const root = document.documentElement
 
   root.style.setProperty('--initial-color-mode', colorMode)
 
-  // @ts-ignore
+  //@ts-ignore
   Object.entries(theme[colorMode]).forEach(([name, colorByTheme]) => {
     const cssVarName = `--color-${name}`
     root.style.setProperty(cssVarName, String(colorByTheme))
   })
 }
 
-export function ScriptHydrationTheme(Theme: themeModes): JSX.Element {
+export function ScriptHydrationTheme(Theme: ThemeModes): JSX.Element {
   const functionString = String(injection).replace(
     "'substitutedForTheme'",
     JSON.stringify(Theme)
