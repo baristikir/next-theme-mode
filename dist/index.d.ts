@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react';
 interface IThemeContext {
     colorMode: string;
-    setColorMode: (newValue: string) => void;
+    setColorMode: (newValue: keyof ThemeModes) => void;
 }
 export declare const ThemeContext: React.Context<IThemeContext>;
 export declare const useTheme: () => IThemeContext;
-declare type themeModes = {
+declare type ThemeModes = {
     light: {
         [theme: string]: string;
     };
@@ -14,12 +14,12 @@ declare type themeModes = {
     };
 };
 export interface ITheme {
-    themes: themeModes;
+    themes: ThemeModes;
 }
-interface ThemeModeProviderProps {
+interface ThemeProviderProps {
     children: ReactNode;
-    customThemes: themeModes;
+    customThemes: ThemeModes;
 }
-export declare const ThemeModeProvider: React.FC<ThemeModeProviderProps>;
-export declare function ScriptHydrationTheme(Theme: themeModes): JSX.Element;
+export declare const ThemeProvider: React.FC<ThemeProviderProps>;
+export declare function ScriptHydrationTheme(Theme: ThemeModes): JSX.Element;
 export {};

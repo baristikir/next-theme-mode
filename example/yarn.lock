@@ -905,10 +905,10 @@ native-url@0.3.4:
   dependencies:
     querystring "^0.2.0"
 
-next-theme-mode@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/next-theme-mode/-/next-theme-mode-1.0.6.tgz#6c3f4e9dfca2056d6f107a575336194de73f0109"
-  integrity sha512-07XDDiamrnLqWhOoCPGGo2oLoVStGaxGaq8Z8U4+0MSBecAAV6GkH87c6p0M7tv05QQbq82LpaKPtMIVSrW3/w==
+next-theme-mode@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/next-theme-mode/-/next-theme-mode-1.0.11.tgz#45d5c9a6c2bb374e2b46305f31320ec603d16f28"
+  integrity sha512-W29h1vKVIX6jOX1w4ZfAziS3JO1412wW7WNnnKXbF3H5tGPBK3JOw+iAWtMgX+Ut9H5cEvkLvlIL03/9ClyRMQ==
 
 next@latest:
   version "10.0.8"
