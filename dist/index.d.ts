@@ -21,5 +21,7 @@ interface ThemeProviderProps {
     customThemes: ThemeModes;
 }
 export declare const ThemeProvider: React.FC<ThemeProviderProps>;
-export declare function ScriptHydrationTheme(Theme: ThemeModes): JSX.Element;
+export declare function ScriptHydrationTheme({ themes, }: {
+    themes: ThemeModes;
+}): JSX.Element;
 export {};

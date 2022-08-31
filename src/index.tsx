@@ -110,10 +110,14 @@ function injection() {
   })
 }
 
-export function ScriptHydrationTheme(Theme: ThemeModes): JSX.Element {
+export function ScriptHydrationTheme({
+  themes,
+}: {
+  themes: ThemeModes
+}): JSX.Element {
   const functionString = String(injection).replace(
     "'substitutedForTheme'",
-    JSON.stringify(Theme)
+    JSON.stringify(themes)
   )
   const codeToRunOnClient = `(${functionString})()`
   // eslint-disable-next-line react/no-danger
